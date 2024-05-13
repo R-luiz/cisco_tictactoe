@@ -62,10 +62,6 @@ def victory_for(board, sign):
                 if (i + k < 3 and j - k >= 0 and board[i + k][j - k] == sign):
                     d2sq += 1
             if 3 in (hsq, vsq, d1sq, d2sq):
-                if sign == "O":
-                    print("You won!")
-                else:
-                    print("Computer Won!")
                 return True
     return False
 
@@ -80,7 +76,7 @@ def main():
 	board = [[1, 2, 3], [4, "X", 6], [7, 8, 9]]
 	display_board(board)
 	sign = "X"
-	while not victory_for(board, sign):
+	while (not victory_for(board, sign)) and (len(make_list_of_free_fields(board)) != 0):
 		if sign == "O":
 			sign = "X"
 		else:
@@ -91,6 +87,14 @@ def main():
 		else:
 			draw_move(board)
 			display_board(board)
+	if not victory_for(board, sign):
+		print("It's a tie")
+		return
+	else:
+		if sign == "O":
+			print("You won!")
+		else:
+			print("Computer Won!")
 
 if __name__ == '__main__':
 	main()
